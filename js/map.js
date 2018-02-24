@@ -23,7 +23,7 @@
  			var polyCQL = polyStringParse.replace(regExpPattern, '$2 $1');
  			var polyCQLArray = polyStringParse.split(',')
 
- 			var polyurl = ocation.protocol + "18.221.74.167:8080/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=postgresql:addresses&outputFormat=application/json&format_options=callback:getJson&SrsName=EPSG:4326&cql_filter=INTERSECTS(geom, POLYGON((" + polyCQL + ', ' + polyCQLArray[1] + ' ' + polyCQLArray[0] + ")))"; var download_url = "http://localhost:8080/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=policy:rclt_sv_allpersonal&outputFormat=csv&format_options=callback:getJson&SrsName=EPSG:4326&cql_filter=INTERSECTS(geom, POLYGON((" + polyCQL + ', ' + polyCQLArray[1] + ' ' + polyCQLArray[0] + ")))";
+ 			var polyurl = location.protocol + "18.221.74.167:8080/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=postgresql:addresses&outputFormat=application/json&format_options=callback:getJson&SrsName=EPSG:4326&cql_filter=INTERSECTS(geom, POLYGON((" + polyCQL + ', ' + polyCQLArray[1] + ' ' + polyCQLArray[0] + ")))"; var download_url = "http://localhost:8080/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=policy:rclt_sv_allpersonal&outputFormat=csv&format_options=callback:getJson&SrsName=EPSG:4326&cql_filter=INTERSECTS(geom, POLYGON((" + polyCQL + ', ' + polyCQLArray[1] + ' ' + polyCQLArray[0] + ")))";
 
 			$.ajax({url: polyurl,
  				success: function(result){
@@ -59,13 +59,13 @@
  	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
  });
 
- var counties = L.tileLayer.wms('http://18.221.74.167:8080/geoserver/ows?', {
+ var counties = L.tileLayer.wms('location.protocol + "//18.221.74.167:8080/geoserver/ows?', {
  	layers: 'postgresql:counties',
  	transparent: true,
  	format: 'image/png'
  });
 
- var addresses = L.tileLayer.wms('http://18.221.74.167:8080/geoserver/ows?', {
+ var addresses = L.tileLayer.wms(location.protocol + "18.221.74.167:8080/geoserver/ows?', {
  	layers: 'postgresql:addresses',
  	transparent: true,
  	format: 'image/png'
