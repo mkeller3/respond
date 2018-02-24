@@ -59,7 +59,7 @@
  	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
  });
 
- var counties = L.tileLayer.wms('location.protocol + '//18.221.74.167:8080/geoserver/ows?', {
+ var counties = L.tileLayer.wms(location.protocol + '//18.221.74.167:8080/geoserver/ows?', {
  	layers: 'postgresql:counties',
  	transparent: true,
  	format: 'image/png'
