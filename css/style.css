@@ -1,0 +1,41 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden; 
+      
+}
+
+.navbar{
+	margin-bottom: 0;
+	border-radius: 0;
+}
+
+.navbar .navbar-brand{
+	font-weight: bold;
+	font-size: 25px;
+	color: #FFFFFF;
+}
+
+
+
+.col-lg-3{
+	background: #d5dbdb;
+	height: calc(100vh - 55px);
+	overflow: scroll;
+	overflow-x: hidden;
+	width: 25%;
+	margin-top: 0;
+}
+
+.row{
+	padding: 5px
+}
+
+#map{
+	width: 100%; 
+	height: calc(100vh - 85px);
+}
+
+.col-lg-9{
+	height: calc(100vh - 85px);
+}

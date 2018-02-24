@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Respond</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
+	<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
+	<script src="js/address_search.js"></script>
+	<script src="js/Leaflet.draw.js"></script>
+	<script src="js/Leaflet.Draw.Event.js"></script>
+	<link rel="stylesheet" href="js/leaflet.draw.css"/>
+	<script src="js/Toolbar.js"></script>
+	<script src="js/Tooltip.js"></script>
+	<script src="js/ext/GeometryUtil.js"></script>
+	<script src="js/ext/LatLngUtil.js"></script>
+	<script src="js/ext/LineUtil.Intersect.js"></script>
+	<script src="js/ext/Polygon.Intersect.js"></script>
+	<script src="js/ext/Polyline.Intersect.js"></script>
+	<script src="js/ext/TouchEvents.js"></script>
+	<script src="js/draw/DrawToolbar.js"></script>
+	<script src="js/draw/handler/Draw.Feature.js"></script>
+	<script src="js/draw/handler/Draw.SimpleShape.js"></script>
+	<script src="js/draw/handler/Draw.Polyline.js"></script>
+	<script src="js/draw/handler/Draw.Marker.js"></script>
+	<script src="js/draw/handler/Draw.Circle.js"></script>
+	<script src="js/draw/handler/Draw.CircleMarker.js"></script>
+	<script src="js/draw/handler/Draw.Polygon.js"></script>
+	<script src="js/draw/handler/Draw.Rectangle.js"></script>
+	<script src="js/edit/EditToolbar.js"></script>
+	<script src="js/edit/handler/EditToolbar.Edit.js"></script>
+	<script src="js/edit/handler/EditToolbar.Delete.js"></script>
+	<script src="js/Control.Draw.js"></script>
+	<script src="js/edit/handler/Edit.Poly.js"></script>
+	<script src="js/edit/handler/Edit.SimpleShape.js"></script>
+	<script src="js/edit/handler/Edit.Rectangle.js"></script>
+	<script src="js/edit/handler/Edit.Marker.js"></script>
+	<script src="js/edit/handler/Edit.CircleMarker.js"></script>
+	<script src="js/edit/handler/Edit.Circle.js"></script>
+	<script src="https://unpkg.com/esri-leaflet@2.0.4/dist/esri-leaflet.js"></script>
+
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="">Respond</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="index.html"><span class=" glyphicon glyphicon-search" id="logIcon"></span> Analysis</a></li>
+				<li><a href="index.html"><span class="glyphicon glyphicon-upload" id="logIcon"></span> Upload Data</a></li>  				
+				<li><a href="index.html"><span class="glyphicon glyphicon-map-marker" id="logIcon"></span> Address Search</a></li>          
+			</ul>
+		</div>
+	</nav>
+
+	<div class="fluid-container">    
+		<div class="row">
+			<div class="col-lg-3" id="analysis">
+				<h3>Select an Area Filter</h3>
+			
+			<button type="button" id="rectangle_filter" class="btn btn-success">Rectangle</button>
+			<button type="button" id="polygon_filter" class="btn btn-success">Polygon</button>
+			<button type="button" id="clear_filters" class="btn btn-danger">Clear Selections</button>
+
+			<hr>
+			<h2>Results</h2>
+
+			<p>Homes affected: <span id="total_affected"></span></p>
+			<p>Total Loss: $<span id="total_loss"></span></p>
+
+		</div>			
+			<div class="col-lg-3" id="address_search">
+				<form>
+					<div class="form-group">
+						<label for="address">Address</label>
+						<input type="text" class="form-control" id="address" placeholder="Enter Address">
+					</div>
+					<div class="form-group">
+						<label for="address2">Address 2</label>
+						<input type="text" class="form-control" id="address2" placeholder="Enter Address 2">
+					</div>
+					<div class="form-group">
+						<label for="city">City</label>
+						<input type="text" class="form-control" id="city" placeholder="Enter City">
+					</div>
+					<div class="form-group">
+						<label for="state">State</label>
+						<input type="text" class="form-control" id="state" placeholder="Enter State">
+					</div>
+					<div class="form-group">
+						<label for="zipcode">Zip Code</label>
+						<input type="text" class="form-control" id="zipcode" placeholder="Enter Zip Code">
+					</div>          
+					<button  type="button" id="geocode" class="btn btn-success">Submit</button>
+				</form>
+				<table id="results" class="table table-striped">
+					<thead>
+						<tr>
+							<th colspan="2">Results</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Address</td>
+							<td id="address_result"></td>
+						</tr>     
+						<tr>
+							<td>Landslide Risk</td>
+							<td id="risk_result"></td>
+						</tr>         
+					</tbody>
+				</table>
+			</div>			
+			<div class="col-lg-9">
+				<div id="map"></div>   
+			</div>
+		</div>
+		<script src="js/map.js"></script>
+	</body>
+	</html>
+
